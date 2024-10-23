@@ -1,5 +1,6 @@
-###### yolo 가상환경 만들기
-``` 
+#### yolo 가상환경 만들기
+
+``` bash
 uname -a
 wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh
 sudo chmod 755 Archiconda3-0.2.3-Linux-aarch64.sh
@@ -8,7 +9,7 @@ sudo chmod 755 Archiconda3-0.2.3-Linux-aarch64.sh
 ``` bash
  ls
 ````
-###### 결과
+##### 결과
 Archiconda3-0.2.3-Linux-aarch64.sh  Pictures
 Desktop                             Public
 Documents                           Templates
