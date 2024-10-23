@@ -148,7 +148,7 @@ jetson_release
 ##### conda environments:
 python3.8 가상환경 만들기
 
-base가 아닌 native 환경에서 아래 명령어를 실행한다.
+base가 아닌 native 환경에서 아래 명령어를 실행
 ``` bash
 conda create -n yolo python=3.8 -y
 conda env list
@@ -157,7 +157,7 @@ conda env list
 ``` bash
  conda activate yolo
 ```
-###### "conda activate yolo"를 실행하여 yolo 가상환경으로 진입해서 pytorch, torchvision을 설치하는 과정이다.
+###### "conda activate yolo"를 실행하여 yolo 가상환경으로 진입해서 pytorch, torchvision을 설치하는 과정
 
 ###### 결과 가상에서 설치 torch, torchvosion 다운로드
 (yolo) dli@dli:~$ 
