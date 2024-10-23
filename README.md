@@ -1,43 +1,28 @@
 #### yolo 가상환경 만들기
 
-``` bash
+#### 잿슨나노의 기본세팅이 되어있다는 전제하에 진행하도록 하겠습니다.
+기본세팅의 자세한 사항은 https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#write 에서 확인해주세요.
+
+""참고 링크 https://github.com/jetsonmom/yolov8_jetson4GB?tab=readme-ov-file   ,    https://cyb.tw/docs/Tech/2020/9/18_Install-anaconda-on-Jetson-Nano.html#install-archiconda ""
+```
+sudo apt update
+sudo apt upgarde
+```
+가장 먼저 업데이트 업그레이드를 한다.
+
+아나콘다를 다운하고 실행파일에 권한을 준다.
+```
+uycgb
 uname -a
 wget https://github.com/Archiconda/build-tools/releases/download/0.2.3/Archiconda3-0.2.3-Linux-aarch64.sh
 sudo chmod 755 Archiconda3-0.2.3-Linux-aarch64.sh
-````
-
-``` bash
- ls
-````
-#### 결과
-
-Archiconda3-0.2.3-Linux-aarch64.sh  Pictures
-Desktop                             Public
-Documents                           Templates
-Downloads                           Videos
-examples.desktop                    yolov8_4gb
-Music
-
-``` bash
- ./Archiconda3-0.2.3-Linux-aarch64.sh 
 ```
-##### 실행 중 선택하라고 나온다.
-
-설치 프로그램 진행 방법
-./Archiconda3-0.2.3-Linux-aarch64.sh 실행이미 실행 중인 상태이므로 바로 다음 단계로 넘어갑니다.
-라이선스 스크롤링라이선스 텍스트를 모두 읽거나 빠르게 넘기고 싶다면 [q]
-
-설치 경로 지정 및 설치 완료설치 경로를 입력하라는 메시지가 나타납니다. 기본 경로 [Enter]
-
-환경 변수 설정설치가 완료되면 터미널에서 conda 명령을 사용하기 위해 다음과 같이 .bashrc에 경로를 추가
-yes--->
-enter --->
-yes
-in your /home/ldh/.bashrc ? [yes|no]
-[no] >>> yes
-
-
-``` bash
+해당 파일을 실행한다
+```
+ ./Archiconda3-0.2.3-Linux-aarch64.sh
+```
+실행후 Enter 키를 눌러 다음으로 넘어가고 YES를 입력하라는 메세지가 나오면 YES를 입력한다 그에 따른 결과값이 다음과 같다.
+```
 ###### result 
 ldh@ldh-desktop:~$  ./Archiconda3-0.2.3-Linux-aarch64.sh
 
@@ -140,54 +125,49 @@ For this change to become active, you have to open a new terminal.
 
 Thank you for installing Archiconda3!
 ```
-``` bash
+
+결과가 잘나왔으면 다음 명령어를 입력한다.
+
+```
 conda env list
 conda activate base
 jetson_release 
+```
+
+이후 python3.8. 가상환경을 만들고 욜로 가상환경을 만들어 들어간다.
 
 ```
-##### conda environments:
-python3.8 가상환경 만들기
-
-base가 아닌 native 환경에서 아래 명령어를 실행
-``` bash
 conda create -n yolo python=3.8 -y
 conda env list
 ```
-
-``` bash
- conda activate yolo
 ```
-###### "conda activate yolo"를 실행하여 yolo 가상환경으로 진입해서 pytorch, torchvision을 설치하는 과정
+conda activate yolo
+```
 
-###### 결과 가상에서 설치 torch, torchvosion 다운로드
-(yolo) dli@dli:~$ 
+욜로 가상환경에 들어오면  (yolo)dli@dliL~$ 과 같이 나타날 것이다.
 
-``` bash
+```
  pip install -U pip wheel gdown
 
  gdown https://drive.google.com/uc?id=1hs9HM0XJ2LPFghcn7ZMOs5qu5HexPXwM
 
  gdown https://drive.google.com/uc?id=1m0d8ruUY8RvCP9eVjZw4Nc8LAwM8yuGV
 ```
-아래 두 라인을 실행(library 설치) 후 torch, torchvision은 확인이 가능하였다.
-``` bash
+```
 sudo apt-get install libopenblas-base libopenmpi-dev
 sudo apt-get install libomp-dev
 pip install torch-1.11.0a0+gitbc2c6ed-cp38-cp38-linux_aarch64.whl
 pip install torchvision-0.12.0a0+9b5a3fe-cp38-cp38-linux_aarch64.whl
 python -c "import torch; print(torch.__version__)"
-
 ```
 
+만약 오류가 발생 한다면 numpy 설치가 제대로 되지않은것이므로 수동으로 설치해준다.
 
-###### 위의 에러는 numpy 다운로드 안되어 있어서 에러 발생
-``` bash
- conda install numpy                                       # 또는 >>> 다음에 설치를 해도 된다.
 ```
-after download -> install
+conda install numpy
+```
 
-``` bash
+```
 
 (yolo) dli@dli:~$ python
 
@@ -197,55 +177,53 @@ after download -> install
 >>> print(torchvision.__version__)
 >>> print("cuda used", torch.cuda.is_available())
 cuda used True
->>> 
+>>>
 ```
-``` bash
+```
 git clone https://github.com/Tory-Hwang/Jetson-Nano2
 ```
-``` bash
-(yolo) dli@dli:~$ cd Jetson-Nano2/
-(yolo) dli@dli:~/Jetson-Nano2$ cd V8
-(yolo) dli@dli:~/Jetson-Nano2/V8$ pip install ultralytics
-(yolo) dli@dli:~/Jetson-Nano2/V8$ pip install -r requirements.txt 
-(yolo) dli@jdli:~/Jetson-Nano2/V8$ pip install ffmpeg-python
-(yolo) dli@dli:~/Jetson-Nano2$ sudo apt install tree
-(yolo) dli@jdli:~/Jetson-Nano2$treee -L 2
+
 ```
-#####
-
-![image](https://github.com/jetsonmom/yolov8_jetson4GB/assets/92077615/3eaf5716-b3f0-403c-88c1-473befe274e0)
-######  yolov8n.pt 다운로드
-https://github.com/ultralytics/ultralytics?tab=readme-ov-file
-위의 링크에서 다운로드 받았다.
-경로는 (yolo) dli@jetson:~/Jetson-Nano2/V8
-
-!![제목 없음](https://github.com/jetsonmom/yolov8_jetson4GB/assets/92077615/d687b7ea-5889-466e-83cb-a249954658f1)
-
-!![Screenshot from 2024-03-24 23-44-20](https://github.com/jetsonmom/yolov8_jetson4GB/assets/92077615/89dc7fc0-fc81-48ba-8268-e9b7667e04f7)
-
-!![Screenshot from 2024-03-24 23-50-56](https://github.com/jetsonmom/yolov8_jetson4GB/assets/92077615/bb772518-fb6a-4f07-a4af-b340ff53e476)
-
-
-
-###### USB camera를 연결하였다. 그러나 전혀 Yolo를 실행하는 화면이 보이지 않았다. 이유는 환경이 달라서이다. 코드 수정해야한다.
-``` bash
-gedit  detectY8.py
+cd Jetson-Nano2/
 ```
-
-(yolo) dli@jetson:~/Jetson-Nano2/V8$ python detectY8.py 
-
-###### 코드를 보니 rtsp가 기본으로 되어있다. 그래서 rtsp를 사용하지 않도록 변경했다.
-!![Screenshot from 2024-03-25 12-58-30](https://github.com/jetsonmom/yolov8_jetson4GB/assets/92077615/3883ca74-efd7-4e92-9888-89b40a9e01bd)
-
-
-def predict(cfg=DEFAULT_CFG, use_python=False):
-    brtsp = True
--> 
-    brtsp = False
-detectY8.py 스크립트에서 RTSP(Remote Desktop Protocol)를 사용하지 않도록 변경하려면, brtsp = True 라인을 찾아 False로 변경해야 합니다. 이 변경은 스크립트가 RTSP 스트리밍 대신 다른 비디오 입력 소스(예: USB 카메라)를 사용하도록 지시합니다. 코드에서 brtsp 변수가 RTSP 스트리밍을 활성화하거나 비활성화하는 데 사용되는 것으로 보입니다.
-
-
-``` bash
-(yolo) yolo@yolo-desktop:~/Jetson-Nano2/V8$ python detectY8.py
 ```
-!![Screenshot from 2024-03-25 13-23-47](https://github.com/jetsonmom/yolov8_jetson4GB/assets/92077615/f84b0a67-571e-45aa-969e-4e6e8188a0b8)
+cd V8
+```
+```
+pip install ultralytics
+```
+```
+pip install -r requirements.txt
+```
+```
+pip install ffmpeg-python
+```
+```
+sudo apt install tree
+```
+```
+tree -L 2
+```
+트리를 실행하면 다음과 같은 결과가 나와야한다.
+
+![image](https://github.com/moon-joy/Jetson-nano/assets/171406702/7c4b161b-5c27-40d6-a1b8-8eb1ec1ac9b3)
+
+이후 https://github.com/ultralytics/ultralytics?tab=readme-ov-file 이 링크에서 yolov8n.py를 다운로드 해준다. 경로는 (yolo) dli@jetson:~/Jetson-Nano2/V8 이다.
+
+![image](https://github.com/moon-joy/Jetson-nano/assets/171406702/86595bc6-3a20-4390-b2aa-42371a5c4c87)
+
+이제 파일을 실행시켜 주기만하면 된다. 
+
+```
+python detectY8.py
+```
+이떄 경로는 (yolo) dli@jetson:~/Jetson-Nano2/V8 로 디렉토리 안에 들어가서 명령어를 쳐야 실행된다.
+
+만약 오류가 발생한다면  detectY8.py 파일의 코드를 수정해야한다. 
+
+
+![image](https://github.com/moon-joy/Jetson-nano/assets/171406702/89a2570f-bc42-4539-af35-9cbc9b143529)
+
+detectY8.py에 들어가서 사진과 같은 코드를 찾아 수정하고 다시 실행하면 된다.
+
+작동 결과는 유튜브에서 확인 가능하다. https://youtu.be/HxUnThdKvtA?si=D56TcjKOtVIDa_Bg 
