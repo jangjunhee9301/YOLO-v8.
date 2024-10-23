@@ -9,7 +9,8 @@ sudo chmod 755 Archiconda3-0.2.3-Linux-aarch64.sh
 ``` bash
  ls
 ````
-##### 결과
+#### 결과
+
 Archiconda3-0.2.3-Linux-aarch64.sh  Pictures
 Desktop                             Public
 Documents                           Templates
@@ -20,7 +21,8 @@ Music
 ``` bash
  ./Archiconda3-0.2.3-Linux-aarch64.sh 
 ```
-###### 실행 중 선택하라고 나온다.
+##### 실행 중 선택하라고 나온다.
+
 설치 프로그램 진행 방법
 ./Archiconda3-0.2.3-Linux-aarch64.sh 실행이미 실행 중인 상태이므로 바로 다음 단계로 넘어갑니다.
 라이선스 스크롤링라이선스 텍스트를 모두 읽거나 빠르게 넘기고 싶다면 [q] 키를 누르세요.
