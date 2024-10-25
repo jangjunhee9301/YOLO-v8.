@@ -137,6 +137,7 @@ jetson_release
 이후 python3.8. 가상환경을 만들고 욜로 가상환경을 만들어 들어간다.
 
 ```
+conda deactiviate 
 conda create -n yolo python=3.8 -y
 conda env list
 ```
