@@ -1,7 +1,7 @@
 #### yolo 가상환경 만들기
 
 #### 잿슨나노의 기본세팅이 되어있다는 전제하에 진행하도록 하겠습니다.
-기본세팅의 자세한 사항은 https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#write 에서 확인해주세요.
+
 
 sudo apt update
 sudo apt upgarde
